@@ -1,4 +1,5 @@
 ﻿using LibraryProject.Models;
+using LibraryProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace LibraryProject.Controllers
 {
+    [Area("User")]
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)

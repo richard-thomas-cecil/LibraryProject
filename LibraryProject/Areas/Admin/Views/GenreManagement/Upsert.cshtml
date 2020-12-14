@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model LibraryProject.Models.Genre
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Add New Genre";
+}
+
+<br />
+
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if(Model.id != 0)
+        {
+            title = "Edit Genre";
+        }
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">    
+                    <label asp-for="name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="name" class="form-conrol" />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        @if(Model.id != 0)
+                        {
+                            <partial name="_EditAndBackToListButton" model="Model.id" />
+                        }
+                        else
+                        {
+                            <partial name="_CreateAndBackToListButton" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</form>
+
+@section Scripts{ 
+<partial name="_ValidationScriptsPartial" />
+}
