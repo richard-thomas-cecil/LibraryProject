@@ -69,7 +69,18 @@ namespace LibraryProject.Areas.Admin.Controllers
             var allObj = _unitOfWork.Genre.GetAll();
             return Json(new { data = allObj });
         }
-
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var objFromDb = _unitOfWork.Genre.Get(id);
+            if (objFromDb ==null)
+            {
+                return Json(new { success = false, message="Failed to Delete Genre" });
+            }
+            _unitOfWork.Genre.Remove(objFromDb);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Genre Deleted" });
+        }
         #endregion
 
     }

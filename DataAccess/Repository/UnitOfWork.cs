@@ -15,9 +15,11 @@ namespace LibraryProject.DataAccess.Repository
             _db = db;
 
             Genre = new GenreRepository(_db);
+            Book = new BookRepository(_db);
         }
 
         public IGenreRepository Genre { get; set; }
+        public IBookRepository Book { get; set; }
 
         public void Dispose()
         {

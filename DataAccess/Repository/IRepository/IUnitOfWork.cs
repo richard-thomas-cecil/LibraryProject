@@ -7,6 +7,7 @@ namespace LibraryProject.DataAccess.Repository.IRepository
     public interface IUnitOfWork : IDisposable
     {
         IGenreRepository Genre { get; set; }
+        IBookRepository Book { get; set; }
 
         void Save();
     }

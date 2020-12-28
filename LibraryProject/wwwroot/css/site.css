@@ -1,15 +1,51 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: ghostwhite;
+}
+
+.sidenav{
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    padding-top: 20px;
+}
+
+.sidenav-title{
+    white-space: normal;
+    text-align: left;
+    word-break: break-all;
+
+}
+
+.active{
+    background-color: ghostwhite;
+    color: black;
 }
 
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
+}
+
+.sidenav a{
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    text-align:left; 
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
 }
 
 .btn-primary {

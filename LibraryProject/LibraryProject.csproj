@@ -29,6 +29,7 @@
     <Folder Include="Areas\StockMaster\Controllers\" />
     <Folder Include="Areas\StockMaster\Data\" />
     <Folder Include="Areas\StockMaster\Models\" />
+    <Folder Include="wwwroot\Images\BookCovers\" />
   </ItemGroup>
 
 </Project>
