@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model LibraryProject.Models.CheckedOutBook
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="BookId" />
+    @*<input type="hidden" asp-for="Book.CheckedOut" />
+    <input type="hidden" asp-for="Book.Total" />*@
+
+    <label asp-for="MemberId">Enter Member ID</label>
+    <input asp-for="MemberId" class="form-control" />
+    <span asp-validation-for="MemberId" class="text-danger"></span>
+
+    <button type="submit" class="btn btn-primary form-control">Confirm</button>
+</form>

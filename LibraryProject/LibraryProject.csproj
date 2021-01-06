@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Librarian\Data\**" />
+    <Compile Remove="Areas\Librarian\Models\**" />
+    <Content Remove="Areas\Librarian\Data\**" />
+    <Content Remove="Areas\Librarian\Models\**" />
+    <EmbeddedResource Remove="Areas\Librarian\Data\**" />
+    <EmbeddedResource Remove="Areas\Librarian\Models\**" />
+    <None Remove="Areas\Librarian\Data\**" />
+    <None Remove="Areas\Librarian\Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.1" />
@@ -23,12 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Librarian\Controllers\" />
-    <Folder Include="Areas\Librarian\Data\" />
-    <Folder Include="Areas\Librarian\Models\" />
-    <Folder Include="Areas\StockMaster\Controllers\" />
-    <Folder Include="Areas\StockMaster\Data\" />
-    <Folder Include="Areas\StockMaster\Models\" />
     <Folder Include="wwwroot\Images\BookCovers\" />
   </ItemGroup>
 

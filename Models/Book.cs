@@ -30,5 +30,8 @@ namespace LibraryProject.Models
         public int GenreId { get; set; }
         [ForeignKey("GenreId")]
         public Genre genre { get; set; }
+
+        [NotMapped]
+        public int Available { get; set; }
     }
 }

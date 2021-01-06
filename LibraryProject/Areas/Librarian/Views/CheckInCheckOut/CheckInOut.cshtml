@@ -1,0 +1,34 @@
+﻿@model LibraryProject.Models.CheckedOutBook
+@{
+    ViewData["Title"] = "CheckInOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CheckInOut</h1>
+
+<div class="container">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <label asp-for="Book.ISBN">Enter ISBN</label>
+            <input asp-for="Book.ISBN" class="form-control" />
+            <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <label asp-for="MemberId">Enter Member ID</label>
+            <input asp-for="MemberId" class="form-control" />
+            <span asp-validation-for="MemberId" class="text-danger"></span>
+        </div>
+        <div class="row">
+
+            <div class="col"> 
+                <button type="submit" class="btn btn-primary form-control" name="checkOut" value="CheckOut">Check Out</button>
+                @*<a asp-area="User" asp-controller="BookView" asp-action="CheckOut" asp-route-id="@Model.id" class="btn btn-primary">Check Out</a>*@                
+            </div>
+            <div class="col">               
+                @*<a asp-area="User" asp-controller="BookView" asp-action="CheckIn" asp-route-id="@Model.id" class="btn btn-success">Check In</a>*@ 
+                <button type="submit" class="btn btn-primary form-control" name="checkIn" value="CheckIn">Check In</button>
+            </div>
+        </div>
+    </form>
+</div>

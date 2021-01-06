@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Utilities
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -52,19 +54,53 @@
                             <a class="nav-link text" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text" asp-area="User" asp-controller="BookView" asp-action="Index">Book List</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown dropright">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Content Management
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="GenreManagement" asp-action="Index">Genre Management</a>
-                                <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="BookManagement" asp-action="Index">Book Management</a>                            
-                            </div>
-                        </li>
+                        <li class="dropdown-divider"></li>
+                        @if (User.IsInRole(SD.Role_Admin_Employee) || User.IsInRole(SD.Role_Librarian_Employee))
+                        {
+                            <li class="dropdown-divider"></li>
+                            <li class="nav-item dropdown dropright">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                    </ul>
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="GenreManagement" asp-action="Index">Genre Management</a>
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="BookManagement" asp-action="Index">Book Management</a>
+
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.Role_Admin_Employee) || User.IsInRole(SD.Role_Librarian_Employee) || User.IsInRole(SD.Role_Assistant_Employee))
+                        {
+                            <li class="nav-item dropdown dropright">
+                                <a class="nav-link drowpdown navbar-toggler" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navBarDropdown">
+                                    @if (User.IsInRole(SD.Role_Admin_Employee))
+                                    {
+                                        <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="EmployeeManagement" asp-action="Index">Employee Users</a>
+                                    }
+                                    <a class="dropdown-item text-dark" asp-area="Librarian" asp-controller="LibraryMember" asp-action="Index">Library Members</a>
+
+                                </div>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.Role_Admin_Employee) || User.IsInRole(SD.Role_Librarian_Employee) || User.IsInRole(SD.Role_Assistant_Employee))
+                        {
+                            <li class="dropdown-divider"></li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" asp-area="Librarian" asp-controller="CheckInCheckOut" asp-action="CheckInOut">Check In or Check Out</a>
+                                
+                            </li>
+                        }
+                        </ul>
                 </div>
             </div>
         </nav>

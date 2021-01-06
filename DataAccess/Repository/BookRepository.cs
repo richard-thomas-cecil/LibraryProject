@@ -33,6 +33,15 @@ namespace LibraryProject.DataAccess.Repository
                 objFromDb.CheckedOut = book.CheckedOut;
             }
         }
+
+        public void UpdateCheckOut(Book book)
+        {
+            var objFromDb = _db.Books.FirstOrDefault(s => s.id == book.id);
+            if(objFromDb != null)
+            {
+                objFromDb.CheckedOut = book.CheckedOut;
+            }
+        }
     }
     
 }

@@ -1,14 +1,17 @@
 ﻿using LibraryProject.DataAccess.Repository.IRepository;
 using LibraryProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace LibraryProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin_Employee)]
     public class GenreManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "PayLateFee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    double PaidFee = 0;
+}
+
+<h1>PayLateFee</h1>
+
+<form method="post">
+    <div class="row">
+        @*<label asp-for='@ViewData["PaidFee"]'>Enter Amount Paid</label>
+        <input asp-for='@ViewData["PaidFee"]' class="form-control" />*@
+        <input type="text" id="paidFee" name="paidFee" value="@PaidFee" />
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-primary form-control">Pay Fee</button> 
+    </div>
+</form>

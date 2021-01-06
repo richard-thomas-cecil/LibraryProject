@@ -1,6 +1,7 @@
 ﻿using LibraryProject.DataAccess.Repository.IRepository;
 using LibraryProject.Models;
 using LibraryProject.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,10 +10,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace LibraryProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles=SD.Role_Admin_Employee + "," + SD.Role_Librarian_Employee)]
+     
     public class BookManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

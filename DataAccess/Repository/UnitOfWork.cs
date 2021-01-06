@@ -16,10 +16,18 @@ namespace LibraryProject.DataAccess.Repository
 
             Genre = new GenreRepository(_db);
             Book = new BookRepository(_db);
+            LibraryMember = new LibraryMemberRepository(_db);
+            EmployeeUser = new EmployeeUserRepository(_db);
+            MemberUser = new MemberUserRepository(_db);
+            CheckedOutBook = new CheckedOutBookRepository(_db);
         }
 
-        public IGenreRepository Genre { get; set; }
-        public IBookRepository Book { get; set; }
+        public IGenreRepository Genre { get; private set; }
+        public IBookRepository Book { get; private set; }
+        public ILibraryMemberRepository LibraryMember { get; private set; }
+        public IEmployeeUserRepository EmployeeUser { get; private set; }
+        public IMemberUserRepository MemberUser { get; private set; }
+        public ICheckedOutBookRepository CheckedOutBook { get; private set; }
 
         public void Dispose()
         {

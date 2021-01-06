@@ -1,0 +1,18 @@
+﻿@model LibraryProject.Models.CheckedOutBook
+@{
+    ViewData["Title"] = "CheckIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CheckIn</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="BookId" />
+
+    <label asp-for="MemberId">Enter Member ID</label>
+    <input asp-for="MemberId" class="form-control" />
+    <span asp-validation-for="MemberId" class="text-danger"></span>
+
+    <button type="submit" class="btn btn-primary form-control">Confirm</button>
+</form>

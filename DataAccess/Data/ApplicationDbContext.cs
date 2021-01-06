@@ -15,5 +15,9 @@ namespace LibraryProject.DataAccess.Data
 
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<EmployeeUser> EmployeeUsers { get; set; }
+        public DbSet<MemberUser> MemberUsers { get; set; }
+        public DbSet<LibraryMember> LibraryMembers  { get; set; }
+        public DbSet<CheckedOutBook> CheckedOutBooks { get; set; }
     }
 }
