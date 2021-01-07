@@ -62,6 +62,16 @@ namespace LibraryProject.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //check to see if a book with the same ISBN already exists. If so, we will just update the total number of books for the already existing book.
+                if(_unitOfWork.Book.GetFirstOrDefault(u=>u.ISBN.Equals(bookVM.book.ISBN)) != null)
+                {
+                    Book existingBook = _unitOfWork.Book.GetFirstOrDefault(u => u.ISBN.Equals(bookVM.book.ISBN));
+                    existingBook.Total = existingBook.Total + bookVM.book.Total;
+                    _unitOfWork.Book.Update(existingBook);
+                    _unitOfWork.Save();
+                    return RedirectToAction(nameof(Index));
+                }    
+
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
                 if (files.Count > 0)

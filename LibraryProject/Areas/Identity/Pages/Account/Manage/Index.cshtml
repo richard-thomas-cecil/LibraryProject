@@ -11,14 +11,40 @@
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Input.member.id" type="hidden" />
             <div class="form-group">
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <label asp-for="Input.member.Name"></label>
+                <input asp-for="Input.member.Name" disabled />
+                <input asp-for="Input.member.Name" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.member.PhoneNumber"></label>
+                <input asp-for="Input.member.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.member.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.member.StreetAddress"></label>
+                <input asp-for="Input.member.StreetAddress" class="form-control" />
+                <span asp-validation-for="Input.member.StreetAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.member.City"></label>
+                <input asp-for="Input.member.City" class="form-control" />
+                <span asp-validation-for="Input.member.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.member.State"></label>
+                <input asp-for="Input.member.State" class="form-control" />
+                <span asp-validation-for="Input.member.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.member.PostalCode"></label>
+                <input asp-for="Input.member.PostalCode" class="form-control" />
+                <span asp-validation-for="Input.member.PostalCode" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>

@@ -1,6 +1,7 @@
 using LibraryProject.DataAccess.Data;
 using LibraryProject.DataAccess.Repository;
 using LibraryProject.DataAccess.Repository.IRepository;
+using LibraryProject.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,9 +37,12 @@ namespace LibraryProject
 
             services.AddIdentity<IdentityUser,IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentityCore<MemberUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentityCore<EmployeeUser>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

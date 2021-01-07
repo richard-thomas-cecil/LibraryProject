@@ -17,9 +17,39 @@ function loadDataTable(id) {
             { "data": "book.title", "width": "15%" },
             { "data": "book.authorFirstName", "width": "15%" },
             { "data": "book.authorLastName", "width": "15%" },
-            { "data": "dueDate", "width": "15%" }
-            
+            { "data": "dueDate", "width": "15%" },
+            {
+                "data": { bookId: "bookId", memberId: "memberId" },
+                "render": function (data) {
+                    return `
+                        <div class="text-center">
+                            <a onclick="CheckInPost('${data.bookId}', '${data.memberId}')" class="btn btn-primary" style="curstor:pointer"; width:100px;">
+                                Check In
+                            </a>
+                        </div>
+                    `;
+                }, "width": "10%"
+            }
         ]
+    });
+}
+
+function CheckInPost(bookId, memberId) {
+    //$.post("/Librarian/CheckInCheckOut/CheckInOut/CheckInPost", { isbn: data.isbn, memberId: data.id});
+    $.ajax({
+        type: "POST",
+        url: '/Librarian/CheckInCheckOut/CheckInPost',
+        data: JSON.stringify([bookId, memberId]),
+        contentType: "application/json",
+        success: function (data) {
+            if (data.success) {
+                alert("Book checked in");
+                dataTable.ajax.reload();
+            }
+            else {
+                alert("Unkown Error")
+            }
+        }
     });
 }
 

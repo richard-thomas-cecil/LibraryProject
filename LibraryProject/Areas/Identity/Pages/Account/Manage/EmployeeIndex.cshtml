@@ -1,0 +1,22 @@
+﻿@page
+@model LibraryProject.Areas.Identity.Pages.Account.Manage.EmployeeIndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+
+<h4>@Model.Employee.FirstName @Model.Employee.LastName <br /> @Model.Employee.EmployeeNumber</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+            <div class="form-group">
+                User Name: <br />
+                @Model.Employee.UserName
+            </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

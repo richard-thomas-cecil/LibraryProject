@@ -70,6 +70,7 @@ namespace LibraryProject.Areas.Librarian.Controllers
 
             if (!string.IsNullOrEmpty(checkOut))
             {
+                //Member cannot checkout books if they have overdue books or unpaid late fees
                 if (checkedOutBook.Member.BookOverdue)
                 {
                     ModelState.AddModelError("", "Member has overdue books");
@@ -79,11 +80,13 @@ namespace LibraryProject.Areas.Librarian.Controllers
                 {
                     ModelState.AddModelError("", "Memeber has unpaid late fees");
                 }
+
                 if (book.Available <= 0)
                 {
                     ModelState.AddModelError("", "All available copies of " + book.Title + " are checked out");
                     return View();
                 }
+                //In this implementation, user is only allowed to checkout one copy of a book
                 if (_unitOfWork.CheckedOutBook.GetFirstOrDefault(s => s.MemberId == checkedOutBook.MemberId) != null)
                 {
                     ModelState.AddModelError("", _unitOfWork.LibraryMember.Get(checkedOutBook.MemberId).Name + " has already checked out " + book.Title);
@@ -103,10 +106,8 @@ namespace LibraryProject.Areas.Librarian.Controllers
             {
                 checkedOutBook = _unitOfWork.CheckedOutBook.GetFirstOrDefault(s=> s.MemberId == checkedOutBook.MemberId);
 
-
-                checkedOutBook.Member.BookOverdue = HasOverdueBooks(checkedOutBook.MemberId);
-
-                if (checkedOutBook.Member.BookOverdue)
+                //Update users late fee if book is overdue
+                if (DateTime.Compare(checkedOutBook.DueDate, DateTime.Now) < 0)
                 {
                     checkedOutBook.Member.LateFees = DateTime.Now.Subtract(checkedOutBook.DueDate).Days * overdueFee;
                     _unitOfWork.LibraryMember.UpdateLateFee(checkedOutBook.Member);
@@ -134,12 +135,17 @@ namespace LibraryProject.Areas.Librarian.Controllers
         }
 
 
+
+
         public IActionResult ConfirmCheckInOut(CheckedOutBook checkedOutBook)
         {
             
             return View(checkedOutBook);
         }
 
+        //Methods for original implementation of Check In and Check Out. No longer used in this controller, but were reimplemented in the BookView Controller.
+        //Keeping here for posterity
+        #region DEPRECATED
         public IActionResult CheckOut(int id)
         {
             CheckedOutBook checkedOutBook = new CheckedOutBook
@@ -214,6 +220,7 @@ namespace LibraryProject.Areas.Librarian.Controllers
             ModelState.AddModelError("", "Unkown Error Occurred");
             return View(book);
         }
+        #endregion
 
         public bool HasOverdueBooks(int memberId)
         {
@@ -228,6 +235,7 @@ namespace LibraryProject.Areas.Librarian.Controllers
             }
             return overdue;
         }
+        
 
         #region API CALLS
         public IActionResult GetAll()
@@ -238,6 +246,32 @@ namespace LibraryProject.Areas.Librarian.Controllers
                 book.Available = book.Total - book.CheckedOut;
             }
             return Json(new { data = allObj });
+        }
+
+        //Check In method for checking in from Library Members page, used in LibraryMemberDetails
+        [HttpPost]
+        public IActionResult CheckInPost([FromBody] string[] bookMemberId)
+        {
+            //bookMemberId is passed as string array from LibraryMemberDetails.js with bookId in index [0] and memberId in index [1]. This is then used to pull the correct checkedout book from the CheckedOutBook table
+            CheckedOutBook checkedOutBook = _unitOfWork.CheckedOutBook.GetFirstOrDefault(u => (u.BookId == Int32.Parse(bookMemberId[0])) && (u.MemberId == Int32.Parse(bookMemberId[1])), includeProperties: "Book,Member");
+
+            if(checkedOutBook == null)
+            {
+                return Json(new { success = false });
+            }
+
+            if (DateTime.Compare(checkedOutBook.DueDate, DateTime.Now) < 0)
+            {
+                checkedOutBook.Member.LateFees = DateTime.Now.Subtract(checkedOutBook.DueDate).Days * overdueFee;
+                _unitOfWork.LibraryMember.UpdateLateFee(checkedOutBook.Member);
+            }
+
+            checkedOutBook.Book.CheckedOut--;
+            _unitOfWork.Book.UpdateCheckOut(checkedOutBook.Book);
+            _unitOfWork.CheckedOutBook.Remove(checkedOutBook);
+            _unitOfWork.Save();
+
+            return Json(new { success = true});
         }
         #endregion
     }

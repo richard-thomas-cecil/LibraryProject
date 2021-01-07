@@ -59,7 +59,6 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="dropdown-divider"></li>
                         @if (User.IsInRole(SD.Role_Admin_Employee) || User.IsInRole(SD.Role_Librarian_Employee))
                         {
                             <li class="dropdown-divider"></li>
