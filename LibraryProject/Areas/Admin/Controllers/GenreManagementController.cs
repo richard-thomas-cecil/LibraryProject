@@ -11,7 +11,7 @@ using Utilities;
 namespace LibraryProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin_Employee)]
+    [Authorize(Roles = SD.Role_Admin_Employee + "," + SD.Role_Librarian_Employee)]
     public class GenreManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

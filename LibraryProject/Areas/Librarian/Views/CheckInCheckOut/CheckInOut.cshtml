@@ -20,13 +20,10 @@
             <span asp-validation-for="MemberId" class="text-danger"></span>
         </div>
         <div class="row">
-
-            <div class="col"> 
-                <button type="submit" class="btn btn-primary form-control" name="checkOut" value="CheckOut">Check Out</button>
-                @*<a asp-area="User" asp-controller="BookView" asp-action="CheckOut" asp-route-id="@Model.id" class="btn btn-primary">Check Out</a>*@                
+            <div class="col-3"> 
+                <button type="submit" class="btn btn-primary form-control" name="checkOut" value="CheckOut">Check Out</button>            
             </div>
-            <div class="col">               
-                @*<a asp-area="User" asp-controller="BookView" asp-action="CheckIn" asp-route-id="@Model.id" class="btn btn-success">Check In</a>*@ 
+            <div class="col-3 offset-3">               
                 <button type="submit" class="btn btn-primary form-control" name="checkIn" value="CheckIn">Check In</button>
             </div>
         </div>

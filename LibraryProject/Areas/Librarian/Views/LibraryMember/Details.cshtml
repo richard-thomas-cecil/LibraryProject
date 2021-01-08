@@ -1,4 +1,5 @@
-﻿@model LibraryProject.Models.LibraryMember 
+﻿@using Utilities
+@model LibraryProject.Models.LibraryMember 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +9,18 @@
 <div class="card">
     <div class="card-header">
         <h2 class="card-header">@Model.Name</h2>
-        <div class="col offset-10"> Joined @Model.JoinDate.ToShortDateString()</div>
+        @*Only Admins and Librarians are allowed to edit users, however assistants can still view the details*@
+        @if (!User.IsInRole(SD.Role_Assistant_Employee))
+        {
+            <div class="row">
+                <div class="col offset-10">
+                    <a asp-action="Upsert" asp-area="Librarian" asp-controller="LibraryMember" asp-route-id="@Model.id" class="btn btn-success">Edit</a>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col offset-10"> Joined @Model.JoinDate.ToShortDateString()</div>
+        </div>
     </div>
     <div class="card-body">
         @Model.StreetAddress <br />

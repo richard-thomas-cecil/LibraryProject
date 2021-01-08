@@ -50,6 +50,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <partial name="_LoginPartial" />
+                        <li class="dropdown-divider"></li>
                         <li class="nav-item">
                             <a class="nav-link text" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -59,9 +60,10 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="dropdown-divider"></li>
                         @if (User.IsInRole(SD.Role_Admin_Employee) || User.IsInRole(SD.Role_Librarian_Employee))
                         {
-                            <li class="dropdown-divider"></li>
+
                             <li class="nav-item dropdown dropright">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Content Management
@@ -96,10 +98,10 @@
                             <li class="nav-item">
 
                                 <a class="nav-link" asp-area="Librarian" asp-controller="CheckInCheckOut" asp-action="CheckInOut">Check In or Check Out</a>
-                                
+
                             </li>
                         }
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </nav>

@@ -20,7 +20,14 @@
                     @Model.genre.name
                 </div>
             </div>
-            
+            @if (User.IsInRole(SD.Role_Admin_Employee) || User.IsInRole(SD.Role_Librarian_Employee))
+            {
+                <div class="row">
+                    <div class="col offset-10">
+                        <a asp-area="Admin" asp-controller="BookManagement" asp-action="Upsert" asp-route-id="@Model.id" class="btn btn-success">Edit</a>
+                    </div>
+                </div>
+            }
         </div>
         <div class="card-body">
             <div class="container rounded">

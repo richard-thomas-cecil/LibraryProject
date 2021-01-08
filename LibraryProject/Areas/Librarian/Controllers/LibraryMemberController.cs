@@ -11,7 +11,7 @@ using Utilities;
 namespace LibraryProject.Areas.Librarian.Controllers
 {
     [Area("Librarian")]
-    [Authorize(Roles = SD.Role_Admin_Employee + "," + SD.Role_Librarian_Employee)]
+    [Authorize(Roles = SD.Role_Admin_Employee + "," + SD.Role_Librarian_Employee + "," + SD.Role_Assistant_Employee)]
     public class LibraryMemberController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
